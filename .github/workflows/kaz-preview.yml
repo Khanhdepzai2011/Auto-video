@@ -2,11 +2,17 @@ name: KAZ Remotion Preview
 
 on:
   workflow_dispatch:
+    inputs:
+      episode:
+        description: 'Tên tập trong thư mục episodes, bỏ phần .json'
+        default: demo
+        type: string
   push:
     paths:
       - '.github/workflows/kaz-preview.yml'
       - '**.mjs'
       - 'src/**'
+      - 'episodes/**'
       - 'package*.json'
 
 permissions:
@@ -27,8 +33,11 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y espeak-ng ffmpeg
-      - run: |
-          node make-preview.mjs
+      - env:
+          KAZ_EPISODE: ${{ inputs.episode || 'demo' }}
+        run: |
+          [[ "$KAZ_EPISODE" =~ ^[a-zA-Z0-9_-]+$ ]]
+          node make-preview.mjs preview-job "episodes/$KAZ_EPISODE.json"
           node render.mjs preview-job kaz-preview.mp4
           test "$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 kaz-preview.mp4)" = 1080,1920
           test "$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of csv=p=0 kaz-preview.mp4)" = aac
@@ -38,4 +47,5 @@ jobs:
           name: kaz-remotion-preview
           path: kaz-preview.mp4
           retention-days: 1
+
 

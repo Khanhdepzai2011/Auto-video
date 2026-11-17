@@ -1,0 +1,35 @@
+{
+  "scenes": [
+    {
+      "headline": "5 cách dùng AI",
+      "subtitle": "Bảng tính · Tài liệu · Ghi âm",
+      "narration": "Đây là bản thử của KAZ. Hãy xem năm cách dùng trí tuệ nhân tạo trong công việc."
+    },
+    {
+      "title": "Bảng tính", "headline": "Tóm tắt chi tiêu", "input": "Giao dịch", "output": "Bảng tổng hợp",
+      "narration": "Với một bảng tính, hãy thử tóm tắt các khoản chi tiêu theo từng tháng."
+    },
+    {
+      "title": "Tài liệu", "headline": "Tìm ý chính", "input": "Bài đọc", "output": "Danh sách ý",
+      "narration": "Khi đọc tài liệu dài, hãy yêu cầu tóm tắt và kiểm tra lại từng ý chính."
+    },
+    {
+      "title": "Viết mã", "headline": "Giải thích một hàm", "input": "Đoạn mã", "output": "Giải thích",
+      "narration": "Nếu gặp một hàm khó hiểu, hãy yêu cầu giải thích từng bước và kiểm tra đầu ra."
+    },
+    {
+      "title": "Thiết kế", "headline": "Thử một bố cục", "input": "Bản phác", "output": "Mẫu áp phích",
+      "narration": "Khi thiết kế, hãy tạo vài bố cục từ bản phác rồi chọn mẫu phù hợp."
+    },
+    {
+      "title": "Ghi âm", "headline": "Tìm lại câu nói", "input": "Bản ghi", "output": "Mốc thời gian",
+      "narration": "Với bản ghi âm, hãy tìm đoạn cần trích và kiểm tra lại mốc thời gian."
+    },
+    {
+      "headline": "Thử với một việc thật",
+      "subtitle": "Chọn việc → Thử → Kiểm tra",
+      "narration": "Bắt đầu với một việc nhỏ. Xem lại kết quả trước khi dùng trong công việc."
+    }
+  ]
+}
+
