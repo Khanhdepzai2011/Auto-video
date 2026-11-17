@@ -1,0 +1,41 @@
+name: KAZ Remotion Preview
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/kaz-preview.yml'
+      - '**.mjs'
+      - 'src/**'
+      - 'package*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --test
+      - run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y espeak-ng ffmpeg
+      - run: |
+          node make-preview.mjs
+          node render.mjs preview-job kaz-preview.mp4
+          test "$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 kaz-preview.mp4)" = 1080,1920
+          test "$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of csv=p=0 kaz-preview.mp4)" = aac
+          ffmpeg -v error -xerror -i kaz-preview.mp4 -f null -
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kaz-remotion-preview
+          path: kaz-preview.mp4
+          retention-days: 1
+
